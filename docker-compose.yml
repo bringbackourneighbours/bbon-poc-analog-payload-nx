@@ -1,0 +1,35 @@
+version: "3"
+services:
+#   payload:
+#     image: node:18-alpine
+#     ports:
+#       - '3000:3000'
+#     volumes:
+#       - .:/home/node/app
+#     working_dir: /home/node/app/
+#     command: sh -c "npm ci && npm run dev"
+#     depends_on:
+#       - mongo
+#     env_file:
+#       - .env
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  mongo-express:
+    image: "mongo-express:latest"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongo
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+
+volumes:
+  data:
