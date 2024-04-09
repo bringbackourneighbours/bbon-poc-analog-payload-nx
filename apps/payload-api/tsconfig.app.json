@@ -2,9 +2,27 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "module": "commonjs",
-    "types": ["node", "express"]
+//    "module": "commonjs",
+//    "types": ["node", "express"]
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+//    "outDir": "./dist",
+    "rootDir": "./src",
+    "jsx": "react",
+    "paths": {
+      "payload/generated-types": ["./src/payload-types.ts"]
+    }
   },
-  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
-  "include": ["src/**/*.ts"]
+//  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
+//  "include": ["src/**/*.ts"],
+  "include": ["./src"],
+  "exclude": ["node_modules", "dist", "build"],
+  "ts-node": {
+    "transpileOnly": true,
+    "swc": true
+  }
 }
